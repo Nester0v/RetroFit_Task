@@ -24,29 +24,41 @@ public class Main {
     }
     private void runGoogle() throws IOException{
 
+        System.out.println("ПОЛУЧИМ ОТВЕТ ОТ https://google.com: " + "\n");
+
         GoogleWebService service = new Retrofit.Builder()
                 .baseUrl("https://google.com")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
                 .create(GoogleWebService.class);
 
-        Response<String> respones = service.home().execute();
-        if (respones.isSuccesful()){
-            System.out.println(respones.body());
+        Response<String> response = service.home().execute();
+        if (response.isSuccessful()){
+            System.out.println(response.body());
         }else{
-            System.out.println(respones.errorBody().string());
+            System.out.println(response.errorBody().string());
         }
+        System.out.println("\n");
     }
 
     private void runGithub() throws IOException{
-        new Retrofit.Builder().baseUrl("https://api.github.com/")
+
+        System.out.println("ПОЛУЧИМ ОТВЕТ ОТ https://api.github.com/: " + "\n");
+
+       GitHubService service = new Retrofit.Builder().baseUrl("https://api.github.com/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
-                .create(GithubService.class);
+                .create(GitHubService.class);
 
         Response<String> response = service.getRepositories("octocat").execute();
-
+        if (response.isSuccessful()){
+            System.out.println(response.body());
+        }else{
+            System.out.println(response.errorBody().string());
+        }
+        System.out.println("\n");
     }
+
     private void runTinyUrl()throws IOException{
 
     }
