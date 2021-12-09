@@ -8,7 +8,7 @@ public interface TinyUrlService {
 
     @POST("random")
     @FormUrlEncoded
-    Call<String> makeShortUrl(
+    Call<TinyUrlResponse> makeShortUrl(
             @Field("format")
                     String format,
             @Field("URL")
